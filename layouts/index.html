@@ -4,8 +4,39 @@
   <h1>How many days since Michigan has beaten Ohio State?</h1>
 
   <div id="content">
-    <p id="days_since"><span id="days_count">2900</span> days.</p>
-    <p id="logo"><img src="images/Sad-Michigan-fans.jpg" /></p>
+    <script>
+      const images = [
+          "images/Sad-Michigan-fans.jpg",
+          "images/michigan-girl-sad-face.gif",
+          "images/osu-banner.gif",
+          "images/pitiful-michigan-fans.jpg",
+          "images/sad-fans-in-rain.gif"
+      ];
+
+      function getRandomImage(images) {
+          return images[Math.floor(Math.random() * images.length)];
+      };
+
+      function howManyDaysSince(lastVictory) {
+          var pastDate = new Date(lastVictory);
+          var currentDate = new Date();
+
+          var differenceInTime = currentDate.getTime() - pastDate.getTime();
+          var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+          return Math.floor(differenceInDays)
+      };
+
+
+      window.onload = function () {
+          document.getElementById('randomImage').src = getRandomImage(images);
+          document.getElementById('days_count').innerHTML = howManyDaysSince({{ .Site.Params.lastVictory }});
+      }
+    </script>
+
+    <p id="days_since"><span id="days_count"></span> days.</p>
+
+    <p id="logo"><img id="randomImage"/></p>
     <p id="phrase">It's <span id="time">03:43 PM</span> in Columbus and Michigan still sucks.</p>
 
   </div>
